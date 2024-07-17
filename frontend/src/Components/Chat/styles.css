@@ -1,0 +1,98 @@
+.title {
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  background-color: #f5f1e9;
+  border-radius: 20px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.flatListContainer {
+  width: 100%;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  margin: 5px 20px;
+  padding: 5px 10px;
+  border-radius: 10px;
+  background-color: #363638;
+  align-items: center;
+}
+
+.rowClient {
+  display: flex;
+  flex-direction: row;
+  margin: 5px 20px;
+  padding: 5px 10px;
+  border-radius: 10px;
+  background-color: #005046;
+  align-items: center;
+}
+
+
+.textContainer {
+  padding-left: 10px;
+  padding-right: 30px;
+  flex: 1; /* Para ocupar todo el espacio disponible */
+}
+
+.messageText {
+  color: white;
+  font-size: 16px;
+  text-align: left;
+}
+
+.messageTextClient {
+  color: white;
+  font-size: 16px;
+  text-align: right;
+}
+
+.dateText {
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  text-align: left;
+}
+
+.dateTextClient {
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  text-align: right;
+}
+
+.inputContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 10px;
+  padding: 10px;
+  border-radius: 20px;
+  background-color: #f5f1e9; /* Color de fondo diferente */
+}
+
+.textInput {
+  flex: 1;
+  height: 40px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  border-radius: 20px;
+  padding: 0 10px;
+  margin-right: 10px;
+}
+
+.sendButton {
+  background-color: #4CAF50;
+  padding: 10px 20px;
+  border-radius: 20px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}

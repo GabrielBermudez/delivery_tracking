@@ -1,0 +1,23 @@
+@import "leaflet/dist/leaflet.css";
+
+.leaflet-container {
+  height: 97vh;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 20px;
+}
+
+.mapContainer {
+  flex: 1;
+  margin-right: 20px;
+}
+
+.chatContainer {
+  flex: 1;
+}
