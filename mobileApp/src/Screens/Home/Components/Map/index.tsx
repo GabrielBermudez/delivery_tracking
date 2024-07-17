@@ -8,6 +8,8 @@ import Geolocation from 'react-native-geolocation-service';
 import { IDetallePedido } from '../../../../Interfaces/iDetallePedido';
 import MapViewDirections from 'react-native-maps-directions';
 import CrossHairSvg from '../../../../Assets/CrossHairSvg';
+import axios from 'axios';
+import { BASE_URL, routes } from '../../../../Utils/routes';
 
 type IMapProps = {
   detallePedido: IDetallePedido;
@@ -69,6 +71,7 @@ export const Map = ( { detallePedido }: IMapProps ) => {
               latitude: position.coords.latitude,
               longitude: position.coords.longitude,
             } );
+            onHandlerSendCoordinates(position.coords.latitude, position.coords.longitude);
             setIsOnSuscribe( true );
           },
           _ => { },
@@ -83,6 +86,27 @@ export const Map = ( { detallePedido }: IMapProps ) => {
       mapRef.current.animateToRegion(initialRegion, 1000);
     }
   };
+
+  const onHandlerSendCoordinates = async (latitude: number, longitude: number) => {
+    axios
+        .post(`${BASE_URL}/${routes.coordenadas.enviar}`, {
+          x: latitude,
+          y: longitude,
+        }).then((response) => {
+          
+        })
+        .catch(error => {
+          if (error.response) {
+            console.log('Error response:', error.response.data);
+            console.log('Error status:', error.response.status);
+            console.log('Error headers:', error.response.headers);
+          } else if (error.request) {
+            console.log('Error request:', error.request);
+          } else {
+            console.log('Error message:', error.message);
+          }
+        });
+  }
 
   const PedidoMarker = ( detallePedido: IDetallePedido ) => {
     return (

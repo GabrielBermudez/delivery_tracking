@@ -1,9 +1,7 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { MapContainer, Marker, TileLayer, useMapEvents } from "react-leaflet";
-
 import L from "leaflet";
 import CocheSVG from "./CocheSVG";
-import { useEffect, useState } from "react";
 import { Client } from "@stomp/stompjs";
 import { Chat } from "./Components/Chat";
 
@@ -16,8 +14,7 @@ function EvtClickMapa({ onClick }) {
 }
 
 export default function App() {
-  const position = [-32.9356055, -68.7836019];
-
+  const [position, setPosition] = useState([48.8583701, 2.292985]);
   const [posicionCoche, setPosicionCoche] = useState([0, 0]);
   const [posicionAnterior, setPosicionAnterior] = useState([0, 0]);
   const [anguloCoche, setAnguloCoche] = useState(0);
@@ -35,7 +32,7 @@ export default function App() {
 
     const ws = new WebSocket("ws://localhost:8080/websocket"); // Reemplaza con tu URL y puerto WebSocket
     webSocketRef.current = ws;
-    
+
     ws.onopen = () => {
       setRetryCount(0);
 
@@ -60,6 +57,7 @@ export default function App() {
           const anguloNuevo = calcularAnguloDireccionGPS(posicionAnterior, puntoNuevo);
           setPosicionAnterior(puntoNuevo);
           setPosicionCoche([mensaje.data.x, mensaje.data.y]);
+          setPosition([mensaje.data.x, mensaje.data.y]); // Actualizar position aquí
           setAnguloCoche(anguloNuevo);
           break;
         case "mensaje-cliente":
@@ -108,10 +106,12 @@ export default function App() {
     return anguloGrados;
   };
 
+  const mapKey = position.join(","); // Generar una clave única basada en la posición actual
+
   return (
     <div className="container">
       <div className="mapContainer">
-        <MapContainer center={position} zoom={13} scrollWheelZoom={false}>
+        <MapContainer key={mapKey} center={position} zoom={20} scrollWheelZoom={false}>
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
