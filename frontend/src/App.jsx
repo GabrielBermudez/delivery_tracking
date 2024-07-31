@@ -26,6 +26,10 @@ export default function App() {
   const retryDelay = 2000;
 
   const connectWebSocket = () => {
+    if (webSocketRef.current) {
+      webSocketRef.current.close();
+    }
+
     const ws = new WebSocket("ws://localhost:8080/websocket"); // Reemplaza con tu URL y puerto WebSocket
     webSocketRef.current = ws;
 
@@ -77,6 +81,13 @@ export default function App() {
 
   useEffect(() => {
     connectWebSocket();
+    
+    return () => {
+      if (webSocketRef.current) {
+        webSocketRef.current.onclose = null;
+        webSocketRef.current.close();
+      }
+    };
   }, []);
 
   const svgIconoCoche = L.divIcon({
