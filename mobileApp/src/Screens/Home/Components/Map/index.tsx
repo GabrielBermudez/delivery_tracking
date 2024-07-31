@@ -16,7 +16,7 @@ type IMapProps = {
 };
 
 export const Map = ( { detallePedido }: IMapProps ) => {
-  const GOOGLE_MAPS_APIKEY = 'AIzaSyCsQoIV_crOup9KkteExz540Rs4yown-tQ';
+  const GOOGLE_MAPS_APIKEY = 'AIzaSyDncFq2yJ-nXX9BL-SKz88RLCqegOkJZe4';
   const styles = makeStyles();
 
   const mapRef = useRef<MapView>(null);
